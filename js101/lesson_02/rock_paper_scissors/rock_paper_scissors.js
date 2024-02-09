@@ -15,6 +15,11 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
+function resetScore() {
+  playerScore = 0;
+  computerScore = 0;
+}
+
 function playerWins(choice, computerChoice) {
   return WINNING_COMBOS[choice].includes(computerChoice);
 }
@@ -35,8 +40,10 @@ function displayWinner(choice, computerChoice) {
 
 function checkBestOfFive() {
   if (playerScore === 3) {
+    resetScore();
     console.log('Player wins best of five');
   } else if (computerScore === 3) {
+    resetScore();
     console.log('Computer wins best of five');
   }
 }
