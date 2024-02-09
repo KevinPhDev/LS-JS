@@ -1,5 +1,13 @@
 const readline = require('readline-sync');
 const VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard'];
+const WINNING_COMBOS = {
+  rock: ['scissors', 'lizard'],
+  paper: ['rock', 'spock'],
+  scissors: ['paper', 'lizard'],
+  lizard: ['paper', 'spock'],
+  spock: ['rock', 'scissors'],
+};
+
 let playerScore = 0;
 let computerScore = 0;
 
@@ -8,16 +16,7 @@ function prompt(message) {
 }
 
 function playerWins(choice, computerChoice) {
-  return  (choice === 'rock' && computerChoice === 'scissors') ||
-          (choice === 'paper' && computerChoice === 'rock') ||
-          (choice === 'scissors' && computerChoice === 'paper') ||
-          (choice === 'rock' && computerChoice === 'lizard') ||
-          (choice === 'lizard' && computerChoice === 'spock') ||
-          (choice === 'spock' && computerChoice === 'scissors') ||
-          (choice === 'scissors' && computerChoice === 'lizard') ||
-          (choice === 'lizard' && computerChoice === 'paper') ||
-          (choice === 'paper' && computerChoice === 'spock') ||
-          (choice === 'spock' && computerChoice === 'rock');
+  return WINNING_COMBOS[choice].includes(computerChoice);
 }
 
 function displayWinner(choice, computerChoice) {
