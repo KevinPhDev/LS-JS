@@ -6,7 +6,7 @@ function prompt(message) {
 }
 
 function displayWinner(choice, computerChoice) {
-  prompt(`Player: ${choice} Computer: ${computerChoice}`);
+  prompt(`Player: ${choice} \n=> Computer: ${computerChoice}`);
 
   if ((choice === 'rock' && computerChoice === 'scissors') ||
       (choice === 'paper' && computerChoice === 'rock') ||
@@ -36,8 +36,14 @@ function displayWinner(choice, computerChoice) {
 }
 
 while (true) {
-  prompt(`Choose one: ${VALID_CHOICES.join(', ')}`);
+  prompt(`Choose one: ${VALID_CHOICES.join(', ')}\n
+          You can type r, p, sc, sp and l`);
   let choice = readline.question();
+  if (choice === 'r') choice = 'rock';
+  if (choice === 'p') choice = 'paper';
+  if (choice === 'sc') choice = 'scissors';
+  if (choice === 'sp') choice = 'spock';
+  if (choice === 'l') choice = 'lizard';
 
   while (!VALID_CHOICES.includes(choice)) {
     prompt('Invalid choice');
