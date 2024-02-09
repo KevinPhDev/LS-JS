@@ -1,5 +1,7 @@
 const readline = require('readline-sync');
 const VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard'];
+let playerScore = 0;
+let computerScore = 0;
 
 function prompt(message) {
   console.log(`=> ${message}`);
@@ -19,6 +21,7 @@ function displayWinner(choice, computerChoice) {
       (choice === 'paper' && computerChoice === 'spock') ||
       (choice === 'spock' && computerChoice === 'rock')) {
     prompt('You win!');
+    playerScore += 1;
   } else if ((choice === 'rock' && computerChoice === 'paper') ||
               (choice === 'paper' && computerChoice === 'scissors') ||
               (choice === 'scissors' && computerChoice === 'rock') ||
@@ -30,8 +33,17 @@ function displayWinner(choice, computerChoice) {
               (choice === 'spock' && computerChoice === 'paper') ||
               (choice === 'rock' && computerChoice === 'spock')) {
     prompt('Computer wins!');
+    computerScore += 1;
   } else {
     prompt("It's a tie");
+  }
+}
+
+function checkBestOfFive() {
+  if (playerScore === 3) {
+    console.log('Player wins best of five');
+  } else if (computerScore === 3) {
+    console.log('Computer wins best of five');
   }
 }
 
@@ -54,6 +66,8 @@ while (true) {
   let computerChoice = VALID_CHOICES[randomIndex];
 
   displayWinner(choice, computerChoice);
+  prompt(`Player: ${playerScore} \nComputer: ${computerScore}`);
+  checkBestOfFive();
 
   prompt('Do you want to play again (y/n)?');
   let answer = readline.question().toLowerCase();
